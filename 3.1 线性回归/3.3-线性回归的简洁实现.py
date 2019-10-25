@@ -3,6 +3,9 @@ import torch
 from torch import nn
 import numpy as np
 import torch.utils.data as Data
+torch.manual_seed(1)
+print(torch.__version__)
+torch.set_default_tensor_type('torch.FloatTensor')
 
 #%% [markdown]
 # 1.生成数据集
@@ -48,6 +51,7 @@ print(net) # 使用print可以打印出网络的结构
 for param in net.parameters():
     print(param)
 
+#%% [markdown]
 # # 写法一
 # net = nn.Sequential(
 #     nn.Linear(num_inputs, 1)
