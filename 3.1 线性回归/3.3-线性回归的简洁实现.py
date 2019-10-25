@@ -24,10 +24,9 @@ batch_size = 10
 dataset = Data.TensorDataset(features, labels)
 # 把 dataset 放入 DataLoader
 data_iter = Data.DataLoader(
-    dataset=dataset,      # torch TensorDataset format
+    dataset=dataset,            # torch TensorDataset format
     batch_size=batch_size,      # mini batch size
-    shuffle=True,               # 要不要打乱数据 (打乱比较好)
-    num_workers=2,              # 多线程来读数据
+    shuffle=True                # 要不要打乱数据 (打乱比较好)
 )
 
 for X, y in data_iter:
@@ -52,32 +51,35 @@ for param in net.parameters():
     print(param)
 
 #%% [markdown]
-# # 写法一
-# net = nn.Sequential(
-#     nn.Linear(num_inputs, 1)
-#     # 此处还可以传入其他层
-#     )
+# 写法一
+net = nn.Sequential(
+    nn.Linear(num_inputs, 1)
+    # 此处还可以传入其他层
+    )
 
-# # 写法二
-# net = nn.Sequential()
-# net.add_module('linear', nn.Linear(num_inputs, 1))
-# # net.add_module ......
+#%% [markdown]
+# 写法二
+net = nn.Sequential()
+net.add_module('linear', nn.Linear(num_inputs, 1))
 
-# # 写法三
-# from collections import OrderedDict
-# net = nn.Sequential(OrderedDict([
-#           ('linear', nn.Linear(num_inputs, 1))
-#           # ......
-#         ]))
+#%% [markdown]
+# 写法三
+from collections import OrderedDict
+net = nn.Sequential(OrderedDict([
+          ('linear', nn.Linear(num_inputs, 1))
+          # ......
+        ]))
 
-# print(net)
-# print(net[0])
+
+#%% [markdown]
+print(net)
+print(net[0])
 
 #%% [markdown]
 # 4.初始化模型参数
 from torch.nn import init
-init.normal_(net.weight, mean=0.0, std=0.01)
-init.constant_(net.bias, val=0.0)  # 也可以直接修改bias的data: net[0].bias.data.fill_(0)
+init.normal_(net[0].weight, mean=0.0, std=0.01)
+init.constant_(net[0].bias, val=0.0)  # 也可以直接修改bias的data: net[0].bias.data.fill_(0)
 
 for param in net.parameters():
     print(param)
@@ -119,3 +121,5 @@ for epoch in range(1, num_epochs + 1):
 dense = net[0]
 print(true_w, dense.weight)
 print(true_b, dense.bias)
+
+# %%
