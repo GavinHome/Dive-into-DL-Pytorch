@@ -55,8 +55,7 @@ def log_rmse(net, features, labels):
         rmse = torch.sqrt(2 * loss(clipped_preds.log(), labels.log()).mean())
     return rmse.item()
 
-def train(net, train_features, train_labels, test_features, test_labels,
-          num_epochs, learning_rate, weight_decay, batch_size):
+def train(net, train_features, train_labels, test_features, test_labels, num_epochs, learning_rate, weight_decay, batch_size):
     train_ls, test_ls = [], []
     dataset = torch.utils.data.TensorDataset(train_features, train_labels)
     train_iter = torch.utils.data.DataLoader(dataset, batch_size, shuffle=True)
@@ -72,7 +71,6 @@ def train(net, train_features, train_labels, test_features, test_labels,
         if test_labels is not None:
             test_ls.append(log_rmse(net, test_features, test_labels))
     return train_ls, test_ls
-
 
 #%% [markdown]
 # 4.K折交叉验证
@@ -97,14 +95,11 @@ def k_fold(k, X_train, y_train, num_epochs, learning_rate, weight_decay, batch_s
     for i in range(k):
         data = get_k_fold_data(k, i, X_train, y_train)
         net = get_net(X_train.shape[1])
-        train_ls, valid_ls = train(net, *data, num_epochs, learning_rate,
-                                   weight_decay, batch_size)
+        train_ls, valid_ls = train(net, *data, num_epochs, learning_rate, weight_decay, batch_size)
         train_l_sum += train_ls[-1]
         valid_l_sum += valid_ls[-1]
         if i == 0:
-            d2l.semilogy(range(1, num_epochs + 1), train_ls, 'epochs', 'rmse',
-                         range(1, num_epochs + 1), valid_ls,
-                         ['train', 'valid'])
+            d2l.semilogy(range(1, num_epochs + 1), train_ls, 'epochs', 'rmse', range(1, num_epochs + 1), valid_ls, ['train', 'valid'])
         print('fold %d, train rmse %f, valid rmse %f' % (i, train_ls[-1], valid_ls[-1]))
     return train_l_sum / k, valid_l_sum / k
 
