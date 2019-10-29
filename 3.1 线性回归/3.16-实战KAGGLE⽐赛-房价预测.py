@@ -105,7 +105,7 @@ def k_fold(k, X_train, y_train, num_epochs, learning_rate, weight_decay, batch_s
 
 #%% [markdown]
 # 5.模型选择
-k, num_epochs, lr, weight_decay, batch_size = 5, 100, 5, 0, 64
+k, num_epochs, lr, weight_decay, batch_size = 5, 300, 5, 0, 64
 train_l, valid_l = k_fold(k, train_features, train_labels, num_epochs, lr, weight_decay, batch_size)
 print('%d-fold validation: avg train rmse %f, avg valid rmse %f' % (k, train_l, valid_l))
 
