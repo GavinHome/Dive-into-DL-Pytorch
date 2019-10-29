@@ -19,7 +19,7 @@ num_outputs = 10
 class LinearNet(nn.Module):
     def __init__(self, num_inputs, num_outputs):
         super(LinearNet, self).__init__()
-        self.linear = nn.Linear(num_outputs, num_inputs)
+        self.linear = nn.Linear(num_inputs, num_outputs)
     
     def forward(self, x):
         y = self.linear(x.view(x.shape[0], -1))

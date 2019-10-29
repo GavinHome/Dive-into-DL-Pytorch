@@ -1,4 +1,4 @@
-#%%
+#%% [markdown]
 import torch
 import torchvision
 import numpy as np
@@ -9,7 +9,7 @@ import d2lzh_pytorch as d2l
 #%% [markdown]
 # 1.读取数据
 batch_size = 256
-train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)
+train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size, resize=None, root='Datasets')
 
 #%% [markdown]
 # 2.初始化模型参数
@@ -47,7 +47,7 @@ def accuracy(y_hat, y):
 #%% [markdown]
 # 7.训练模型
 num_epochs, lr = 5, 0.1
-train_ch3(net, train_iter, test_iter, cross_entropy, num_epochs,batch_size, [W, b], lr)
+d2l.train_ch3(net, train_iter, test_iter, cross_entropy, num_epochs,batch_size, [W, b], lr)
 
 #%% [markdown]
 # 8.预测
