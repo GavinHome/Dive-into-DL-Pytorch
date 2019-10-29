@@ -16,9 +16,13 @@ print(len(mnist_train), len(mnist_test))
 
 # %%
 feature, label = mnist_train[0]
-print(feature.shape, label) # Channel x Height X Width
+print(feature.shape, label)
+
+
+# %%
 X, y = [], []
 for i in range(10):
-X.append(mnist_train[i][0])
-y.append(mnist_train[i][1])
-show_fashion_mnist(X, get_fashion_mnist_labels(y))
+    X.append(mnist_train[i][0])
+    y.append(mnist_train[i][1])
+d2l.show_fashion_mnist(X, d2l.get_fashion_mnist_labels(y))
+# %%
